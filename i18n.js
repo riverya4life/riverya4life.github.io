@@ -8,6 +8,7 @@ const translations = {
     menu_github: "GitHub",
     menu_language: "Language",
     to_top: "Back to top",
+    menu_toggle: "Menu",
 
     hero_title: "Hi, I’m riverya4life",
     hero_role: "Python & Lua Developer",
@@ -48,6 +49,7 @@ const translations = {
     menu_github: "GitHub",
     menu_language: "Язык",
     to_top: "Наверх",
+    menu_toggle: "Меню",
 
     hero_title: "Привет, я riverya4life",
     hero_role: "Python и Lua разработчик",
@@ -88,6 +90,7 @@ const translations = {
     menu_github: "GitHub",
     menu_language: "Мова",
     to_top: "Нагору",
+    menu_toggle: "Меню",
 
     hero_title: "Привіт, я riverya4life",
     hero_role: "Python та Lua розробник",

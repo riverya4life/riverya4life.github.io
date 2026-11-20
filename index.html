@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>riverya4life | Python &amp; Lua Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,7 +14,7 @@
       }
 
       :root {
-        --bg: #0d0d0d;
+        --bg: #181818;
         --text: #f5f5f5;
         --muted: #a8a8ad;
         --border: #3a3a3d;
@@ -222,8 +222,8 @@
       }
 
       .hero-image img {
-        width: 236px;
-        height: 236px;
+        width: 365px;
+        height: 365px;
         border-radius: 50%;
         object-fit: cover;
         display: block;
@@ -419,7 +419,7 @@
         top: calc(100% + 8px);
         min-width: 170px;
         padding: .35rem;
-        background: rgba(30, 30, 32, 1.0);
+        background: rgba(30, 30, 32, .95);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border: 1px solid var(--border);
@@ -1060,6 +1060,261 @@
         }
       }
 
+      /* ===== Mobile: progressive-blur header + floating dock ===== */
+      nav a i {
+        display: none
+      }
+
+      .blur-bottom {
+        display: none
+      }
+
+      @media (max-width:760px) {
+
+        body header,
+        body header.scrolled {
+          padding: .8rem 5%
+        }
+
+        .hero::before {
+          width: 90vw;
+          height: 90vw;
+          left: -25vw;
+          top: -30vw;
+          opacity: .7
+        }
+
+        .hero {
+          padding-top: 6.5rem
+        }
+
+        header nav a>i.fa-solid,
+        header nav a>i.fa-brands {
+          display: block
+        }
+
+        .blur-bottom {
+          display: block;
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 120px;
+          pointer-events: none;
+          z-index: 90
+        }
+
+        body {
+          padding-bottom: 96px
+        }
+
+        nav {
+          position: fixed;
+          left: 50%;
+          bottom: calc(14px + env(safe-area-inset-bottom));
+          transform: translateX(-50%);
+          z-index: 120;
+          display: flex;
+          gap: .1rem;
+          padding: .4rem;
+          border-radius: 22px;
+          background: rgba(30, 30, 32, .55);
+          backdrop-filter: blur(18px) saturate(1.5);
+          -webkit-backdrop-filter: blur(18px) saturate(1.5);
+          border: 1px solid rgba(255, 255, 255, .1);
+          box-shadow: 0 14px 40px rgba(0, 0, 0, .5);
+          animation: dockIn .7s cubic-bezier(.2, .8, .2, 1) .35s both
+        }
+
+        nav a {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: .22rem;
+          min-width: 68px;
+          padding: .55rem .6rem;
+          font-size: .68rem;
+          font-weight: 600;
+          letter-spacing: .2px
+        }
+
+        nav a i {
+          display: block;
+          font-size: 1.15rem
+        }
+
+        .nav-ind {
+          top: .4rem;
+          bottom: .4rem;
+          height: auto;
+          border-radius: 17px;
+          background: rgba(var(--lav-rgb), .2);
+          box-shadow: inset 0 0 0 1px rgba(var(--lav-rgb), .28)
+        }
+
+        #lang-button {
+          padding: .45rem .65rem
+        }
+
+        /* iOS notch / home-indicator safe areas */
+        body header,
+        body header.scrolled {
+          padding-top: calc(.8rem + env(safe-area-inset-top))
+        }
+
+        /* dock: icons visible (override the desktop rule), labels never wrap */
+        body header nav a>i.fa-solid,
+        body header nav a>i.fa-brands {
+          display: block;
+          font-size: 1.2rem
+        }
+
+        nav a {
+          white-space: nowrap;
+          min-width: 64px;
+          padding: .55rem .5rem
+        }
+
+        nav a span {
+          line-height: 1.1
+        }
+
+        /* hero */
+        body .hero {
+          min-height: 100svh;
+          padding: calc(8.8rem + env(safe-area-inset-top)) 6% 7.5rem
+        }
+
+        .hero h1 {
+          font-size: clamp(1.9rem, 8.4vw, 2.6rem)
+        }
+
+        body .hero-image img {
+          width: 170px;
+          height: 170px
+        }
+
+        .actions {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: .8rem;
+          width: 100%;
+          max-width: 340px;
+          margin: 0 auto
+        }
+
+        .actions .socials {
+          grid-column: 1/-1;
+          justify-content: center
+        }
+
+        .actions .btn {
+          text-align: center;
+          padding: .9rem .5rem
+        }
+
+        /* the pale avatar glow and the purple blob sat right under the blur band and looked like a grey smear */
+        body .hero-image .glow {
+          animation: none;
+          opacity: .4;
+          filter: blur(24px) saturate(1.2) brightness(.8);
+          transform: translate(-50%, -50%) scale(1.1)
+        }
+
+        .hero::before {
+          top: 22vh;
+          left: -35vw;
+          opacity: .55;
+          animation-duration: 30s
+        }
+
+        .scroll {
+          display: none
+        }
+      }
+
+      @keyframes dockIn {
+        from {
+          opacity: 0;
+          transform: translate(-50%, 24px)
+        }
+
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0)
+        }
+      }
+
+      @media (prefers-reduced-motion:reduce) {
+        nav {
+          animation: none
+        }
+      }
+
+      /* ===== iOS-style progressive blur header (ablur-layer) ===== */
+      body header,
+      body header.scrolled {
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: 0;
+        padding: 1.3rem 9.5%;
+        border: 0;
+        border-radius: 0;
+        background: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        transition: padding .3s
+      }
+
+      body header.scrolled {
+        padding: .85rem 9.5%
+      }
+
+      header nav a>i.fa-solid,
+      header nav a>i.fa-brands {
+        display: none
+      }
+
+      @media (max-width:900px) {
+
+        body header,
+        body header.scrolled {
+          padding: .85rem 6%
+        }
+      }
+
+      /* ===== ABLUR: слой лежит внутри шапки (как на сайте FistashkinBot) ===== */
+      header>ablur-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: calc(100% + 20px);
+        pointer-events: none;
+        z-index: -1
+      }
+
+      header.scrolled>ablur-layer {
+        height: calc(100% + 24px)
+      }
+
+      /* Если в РЕАЛЬНОМ iOS Safari появится чёрная полоса — раскомментируйте, слои скроются только там:
+html.is-ios-safari header > ablur-layer,
+html.is-ios-safari .blur-bottom{display:none!important}
+*/
+      @supports (-webkit-touch-callout: none) {
+        body {
+          min-height: -webkit-fill-available
+        }
+
+        html {
+          height: -webkit-fill-available
+        }
+      }
+
       a:focus-visible {
         outline: 2px solid var(--lav);
         outline-offset: 3px
@@ -1181,19 +1436,44 @@
         if (c) applyAccent(c.h, c.s);
       } catch (e) {}
     </script>
+    <script>
+      (function() {
+        var ua = navigator.userAgent,
+          platform = navigator.platform || "",
+          maxTouch = navigator.maxTouchPoints || 0;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (platform === "MacIntel" && maxTouch > 1);
+        var other = /CriOS|FxiOS|EdgiOS|OPiOS|GSA/.test(ua);
+        if (isIOS && !other) document.documentElement.classList.add("is-ios-safari");
+      })();
+    </script>
+    <script src="ablur.js" defer></script>
   </head>
   <body>
     <div id="progress"></div>
+    <!-- Прогрессивное размытие под шапкой и док-меню (только мобильные) -->
     <header>
+      <ablur-layer layers="5" base-blur="22" end-at="72" flip></ablur-layer>
       <a href="#home" class="logo" aria-label="riverya4life">
         <img src="https://github.com/riverya4life.png" alt="">
       </a>
       <div class="nav-right">
-        <nav>
-          <a href="#home" data-i18n="menu_home">Home</a>
-          <a href="#projects" data-i18n="menu_projects">Projects</a>
-          <a href="#about" data-i18n="menu_about">About</a>
-          <a href="https://github.com/riverya4life" target="_blank" rel="noopener" data-i18n="menu_github">GitHub</a>
+        <nav id="site-nav">
+          <a href="#home">
+            <i class="fa-solid fa-house"></i>
+            <span data-i18n="menu_home">Home</span>
+          </a>
+          <a href="#projects">
+            <i class="fa-solid fa-layer-group"></i>
+            <span data-i18n="menu_projects">Projects</span>
+          </a>
+          <a href="#about">
+            <i class="fa-solid fa-user"></i>
+            <span data-i18n="menu_about">About</span>
+          </a>
+          <a href="https://github.com/riverya4life" target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i>
+            <span data-i18n="menu_github">GitHub</span>
+          </a>
         </nav>
         <div id="lang-switcher">
           <button id="lang-button" type="button" aria-haspopup="true" aria-expanded="false" data-i18n-aria="menu_language" aria-label="Language">
@@ -1332,7 +1612,9 @@
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
       // Шапка: блюр и уменьшение при прокрутке
       const header = document.querySelector('header');
-      const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 30);
+      const onScroll = () => {
+        header.classList.toggle('scrolled', window.scrollY > 30);
+      };
       onScroll();
       window.addEventListener('scroll', onScroll, {
         passive: true
